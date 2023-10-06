@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GSG - Twitter Clone</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div style="background-color: #00bfff">
+      <div
+        class="asideTwitter container"
+        style="
+          display: flex;
+          height: 100px;
+          background-color: #00bfff;
+          align-items: center;
+        "
+      >
+        <h1 style="margin-right: auto; color: white">Twitter Clone</h1>
+        <img style="height: 50%" src="twitter-512.png" alt="" />
+      </div>
+    </div>
+
+    <hr style="margin: 0; margin-bottom: 100px" />
+
+    <div class="container">
+      <div class="form" style="text-align: center">
+        <input class="username"
+          style="
+            width: 243px;
+            border: 1px solid #00bfff;
+            height: 30px;
+            border-radius: 5px;
+          "
+          type="text"
+          placeholder="Username"
+          name="name"
+          id="name"
+        />
+        <br />
+        <br />
+        <textarea class="tweetContent"
+          style="border: 1px solid #00bfff; border-radius: 5px"
+          name="message"
+          id="message"
+          cols="30"
+          rows="10"
+          placeholder="What's Happening ?!"
+        ></textarea>
+        <br />
+        <br />
+        <button class="SendBtn"
+          style="
+            width: 200px;
+            height: 50px;
+            border: none;
+            background-color: #00bfff;
+            color: white;
+            border-radius: 50px;
+            margin: 20px;
+            cursor: pointer
+          "
+        >
+          Tweet
+        </button>
+      </div>
+    </div>
+
+    <div class="container tweetsDiv">
+
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
