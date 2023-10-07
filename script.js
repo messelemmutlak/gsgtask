@@ -27,7 +27,7 @@ function addTweetToArray(usernameText, tweetContentText) {
     Username: usernameText,
     Content: tweetContentText,
     Likes: 0,
-    Retweets: 0
+    Retweets: 0,
   };
   // Push Task To Array Of Tasks
   ArrayOfTweets.push(tweet);
@@ -41,54 +41,74 @@ TweetsDiv.addEventListener("click", (e) => {
   // Delete Button
   if (e.target.classList.contains("delete")) {
     // Remove Task From Local Storage
-    deleteTaskWith(e.target.parentElement.getAttribute("data-id"));
+    deleteTaskWith(e.target.parentElement.getAttribute("data-Content"));
     // Remove Element From Page
     e.target.parentElement.remove();
   }
-  if (e.target.classList.contains("like") || e.target.classList.contains("like-counter")) {
-    if(e.target.classList.contains("like-counter")){
-        LikeIncrementCounter(e.target.parentElement.parentElement.getAttribute("data-id"))
+  if (
+    e.target.classList.contains("like") ||
+    e.target.classList.contains("like-counter")
+  ) {
+    if (e.target.classList.contains("like-counter")) {
+      LikeIncrementCounter(
+        e.target.parentElement.parentElement.getAttribute("data-Content")
+      );
     }
-    LikeIncrementCounter(e.target.parentElement.getAttribute("data-id"))
-    location.reload()
-}
-if (e.target.classList.contains("retweet") || e.target.classList.contains("retweet-counter") ) {
-    if(e.target.classList.contains("retweet-counter")){
-        RetweetIncrementCounter(e.target.parentElement.parentElement.getAttribute("data-id"))
-    }
-    RetweetIncrementCounter(e.target.parentElement.getAttribute("data-id"))
-    location.reload()
+    LikeIncrementCounter(e.target.parentElement.getAttribute("data-Content"));
+    location.reload();
   }
-  
+
+  if (
+    e.target.classList.contains("retweet") ||
+    e.target.classList.contains("retweet-counter")
+  ) {
+    if (e.target.classList.contains("retweet-counter")) {
+      RetweetIncrementCounter(
+        e.target.parentElement.parentElement.getAttribute("data-Content")
+      );
+    }
+    console.log(e.target.parentElement.getAttribute("data-Author"));
+    console.log(e.target.parentElement.getAttribute("data-Content"));
+    addTweetToArray(
+      e.target.parentElement.getAttribute("data-Author"),
+      e.target.parentElement.getAttribute("data-Content")
+    );
+    RetweetIncrementCounter(
+      e.target.parentElement.getAttribute("data-Content")
+    );
+    // location.reload();
+  }
 });
 
-function LikeIncrementCounter(tweetContent){
-    
-    console.log(tweetContent)
-    ArrayOfTweets.forEach((element) => {
-        if(element.Content === tweetContent){
-            console.log(++element.Likes)
-        }
-    })
-    addDataToLocalStorageFrom(ArrayOfTweets);
+function LikeIncrementCounter(tweetContent) {
+  // console.log(tweetContent)
+  ArrayOfTweets.forEach((element) => {
+    if (element.Content === tweetContent) {
+      // console.log(++element.Likes)
+      ++element.Likes;
+    }
+  });
+  addDataToLocalStorageFrom(ArrayOfTweets);
 }
 
-function RetweetIncrementCounter(tweetContent){
-    
-    console.log(tweetContent)
-    ArrayOfTweets.forEach((element) => {
-        if(element.Content === tweetContent){
-            console.log(++element.Retweets)
-        }
-    })
-    addDataToLocalStorageFrom(ArrayOfTweets);
+function RetweetIncrementCounter(tweetContent) {
+  // console.log(tweetContent)
+  ArrayOfTweets.forEach((element) => {
+    if (element.Content === tweetContent) {
+      // console.log(++element.Retweets)
+      ++element.Retweets;
+    }
+  });
+  addDataToLocalStorageFrom(ArrayOfTweets);
 }
 
 function deleteTaskWith(tweetContent) {
-    ArrayOfTweets = ArrayOfTweets.filter((tweet) => tweet.Content != tweetContent)
-    addDataToLocalStorageFrom(ArrayOfTweets);
-    location.href = location.href
-  }
+  ArrayOfTweets = ArrayOfTweets.filter(
+    (tweet) => tweet.Content != tweetContent
+  );
+  addDataToLocalStorageFrom(ArrayOfTweets);
+  // location.href = location.href
+}
 
 function addElementsToPageFrom(ArrayOfTweets) {
   // Empty Tasks Div
@@ -98,7 +118,8 @@ function addElementsToPageFrom(ArrayOfTweets) {
     // Create Main Div
     let div = document.createElement("div");
     div.className = "tweet";
-    div.setAttribute("data-id", tweet.Content);
+    div.setAttribute("data-Content", tweet.Content);
+    div.setAttribute("data-Author", tweet.Username);
     div.appendChild(document.createTextNode(`Author : ${tweet.Username}`));
     div.appendChild(document.createElement("br"));
     div.appendChild(document.createElement("br"));
@@ -111,20 +132,20 @@ function addElementsToPageFrom(ArrayOfTweets) {
     likeBtn.className = "like";
     likeBtn.appendChild(document.createTextNode("Like"));
     // Create Like Incrementer
-    let likeCounterSpan = document.createElement("span")
-    likeCounterSpan.innerHTML = `s ${tweet.Likes}`
-    likeCounterSpan.className = "like-counter"
-    likeBtn.appendChild(likeCounterSpan)
+    let likeCounterSpan = document.createElement("span");
+    likeCounterSpan.innerHTML = `s ${tweet.Likes}`;
+    likeCounterSpan.className = "like-counter";
+    likeBtn.appendChild(likeCounterSpan);
     // #################################
     // Create Retweet Button
     let retweetBtn = document.createElement("span");
     retweetBtn.className = "retweet";
     retweetBtn.appendChild(document.createTextNode("Retweet"));
     // Create Retweet Incrementer
-    let retweetCounterSpan = document.createElement("span")
-    retweetCounterSpan.innerHTML = `s ${tweet.Retweets}`
-    retweetCounterSpan.className = "retweet-counter"
-    retweetBtn.appendChild(retweetCounterSpan)
+    let retweetCounterSpan = document.createElement("span");
+    retweetCounterSpan.innerHTML = `s ${tweet.Retweets}`;
+    retweetCounterSpan.className = "retweet-counter";
+    retweetBtn.appendChild(retweetCounterSpan);
     // #################################
     // Create Delete Button
     let deleteBtn = document.createElement("span");
@@ -134,7 +155,7 @@ function addElementsToPageFrom(ArrayOfTweets) {
     div.appendChild(likeBtn);
     div.appendChild(retweetBtn);
     div.appendChild(deleteBtn);
-    TweetsDiv.appendChild(div);
+    TweetsDiv.insertBefore(div, TweetsDiv.firstChild);
   });
 }
 
@@ -149,3 +170,4 @@ function getDataFromLocalStorage() {
     addElementsToPageFrom(tweets);
   }
 }
+// localStorage.clear()
