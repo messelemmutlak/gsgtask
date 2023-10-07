@@ -1,3 +1,18 @@
+@font-face {
+  font-family: 'Poppins'; /* This is the name you'll use to reference the font. */
+  src: url('Poppins/Poppins-Black.ttf') format('ttf'); /* Specify the path to the font file and its format. */
+  src: url('Poppins/Poppins-Bold.ttf') format('ttf'); /* Specify the path to the font file and its format. */
+  src: url('Poppins/Poppins-ExtraBold.ttf') format('ttf'); /* Specify the path to the font file and its format. */
+  src: url('Poppins/Poppins-ExtraLight.ttf') format('ttf'); /* Specify the path to the font file and its format. */
+  src: url('Poppins/Poppins-Light.ttf') format('ttf'); /* Specify the path to the font file and its format. */
+  src: url('Poppins/Poppins-Medium.ttf') format('ttf'); /* Specify the path to the font file and its format. */
+  src: url('Poppins/Poppins-Regular.ttf') format('ttf'); /* Specify the path to the font file and its format. */
+  src: url('Poppins/Poppins-SemiBold.ttf') format('ttf'); /* Specify the path to the font file and its format. */
+  src: url('Poppins/Poppins-Thin.ttf') format('ttf'); /* Specify the path to the font file and its format. */
+}
+
+
+
 * {
   box-sizing: border-box;
 }
